@@ -17,12 +17,12 @@ public class ChangeFeedExample {
                     collectionName = "employees",
                     leaseCollectionName = "leases",
                     connectionStringSetting = "AzureWebJobsStorage",
-                    createLeaseCollectionIfNotExists = true) Employee[] employees,
+                    createLeaseCollectionIfNotExists = true) Object[] employees,
             ExecutionContext context) {
         Logger logger = context.getLogger();
 
         logger.info("Trigger function executed.");
-        logger.info("Documents count: " + employees.length);
+        logger.info("Employees count: " + employees.length);
 
         System.out.println("Employee ids: ");
         Arrays.stream(employees)
