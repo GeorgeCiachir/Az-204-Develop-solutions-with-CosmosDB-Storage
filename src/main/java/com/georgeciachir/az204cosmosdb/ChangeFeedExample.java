@@ -21,12 +21,8 @@ public class ChangeFeedExample {
             ExecutionContext context) {
         Logger logger = context.getLogger();
 
-        logger.info("Trigger function executed.");
         logger.info("Employees count: " + employees.length);
-
-        System.out.println("Employee ids: ");
-        Arrays.stream(employees)
-                .forEach(System.out::println);
+        logger.info("Employees: " + Arrays.asList(employees));
     }
 
     public static class Employee {
