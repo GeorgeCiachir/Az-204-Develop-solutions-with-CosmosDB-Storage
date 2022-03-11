@@ -16,8 +16,8 @@ public class ChangeFeedExample {
                     databaseName = "demoDB",
                     collectionName = "employees",
                     leaseCollectionName = "leases",
-                    connectionStringSetting = "AzureWebJobsStorage",
-                    createLeaseCollectionIfNotExists = true) Object[] employees,
+                    connectionStringSetting = "developwithcosmos_DOCUMENTDB",
+                    createLeaseCollectionIfNotExists = true) Employee[] employees,
             ExecutionContext context) {
         Logger logger = context.getLogger();
 
