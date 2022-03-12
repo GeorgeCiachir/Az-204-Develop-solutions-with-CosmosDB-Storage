@@ -151,6 +151,8 @@ ES analogy -> Shard replicas
   - Reading data from the DB using change feed, will consume throughput
   - Partition updates will be in order, but between partitions there is no guarantee
   - Is not supported for the Azure Table API
+  - when using change feed, another collection needs to be created, which Azure uses to keep track of the sent notifications (analogy: kafka index). 
+    The default name of this collection is "leases". Be sure that you enable the "create lease collections if not exists" flag    
 - Change feed approaches
   - Azure functions
   - Change feed processor
