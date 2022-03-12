@@ -24,22 +24,4 @@ public class ChangeFeedExample {
         logger.info("Employees count: " + employees.length);
         logger.info("Employees: " + Arrays.asList(employees));
     }
-
-    public static class Employee {
-
-        String id;
-        String firstName;
-        String lastName;
-        String employeeId;
-
-        @Override
-        public String toString() {
-            return "Employee{" +
-                    "id='" + id + '\'' +
-                    ", firstName='" + firstName + '\'' +
-                    ", lastName='" + lastName + '\'' +
-                    ", employeeId='" + employeeId + '\'' +
-                    '}';
-        }
-    }
 }
