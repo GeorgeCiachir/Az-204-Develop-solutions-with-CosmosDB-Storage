@@ -2,10 +2,15 @@ package com.georgeciachir.az204cosmosdb;
 
 public class Employee {
 
-    String id;
-    String firstName;
-    String lastName;
-    String employeeId;
+    public String id;
+    public String firstName;
+    public String lastName;
+    public String employeeId;
+
+    //Required for deserialization
+    public Employee() {
+
+    }
 
     public Employee(String id, String firstName, String lastName, String employeeId) {
         this.id = id;
