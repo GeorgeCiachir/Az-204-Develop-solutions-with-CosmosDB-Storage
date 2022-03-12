@@ -35,7 +35,7 @@ public class AddDocumentHttpFunction {
         String requestBody = request.getBody()
                 .orElseThrow(() -> new RuntimeException("Request ody must be provided"));
 
-        DocumentAddCommand addCommand = MAPPER.readValue(requestBody, DocumentAddCommand.class);
+        AddDocumentCommand addCommand = MAPPER.readValue(requestBody, AddDocumentCommand.class);
 
         String employeeJson = MAPPER.writeValueAsString(addCommand.getEmployee());
 

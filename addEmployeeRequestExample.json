@@ -1,0 +1,14 @@
+{
+  "employee": {
+    "id": "33",
+    "firstName": "Gigi",
+    "lastName": "Furtuna",
+    "employeeId": 33
+  },
+  "dbServiceEndpoint": "https://developwithcosmos.documents.azure.com:443/",
+  "dbKey": "oFRZSXqiM6HkgwdD0o44dsHt0kmn4ipUTcDqRrDNDvpPhM8R1mkpltkqKfbM6L9enxdev6JNRonDjy1zrKJibQ==",
+  "dbName": "demoDB",
+  "collectionName": "employees",
+  "preTriggers": ["trigger1"],
+  "postTriggers": ["postTrigger2"]
+}
