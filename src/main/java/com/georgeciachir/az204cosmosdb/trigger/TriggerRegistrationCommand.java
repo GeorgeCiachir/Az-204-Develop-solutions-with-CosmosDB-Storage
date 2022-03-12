@@ -1,4 +1,4 @@
-package com.georgeciachir.az204cosmosdb;
+package com.georgeciachir.az204cosmosdb.trigger;
 
 import com.microsoft.azure.documentdb.TriggerOperation;
 import com.microsoft.azure.documentdb.TriggerType;

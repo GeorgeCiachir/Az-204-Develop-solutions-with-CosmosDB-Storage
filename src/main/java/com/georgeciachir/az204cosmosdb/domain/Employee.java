@@ -1,4 +1,4 @@
-package com.georgeciachir.az204cosmosdb;
+package com.georgeciachir.az204cosmosdb.domain;
 
 public class Employee {
 

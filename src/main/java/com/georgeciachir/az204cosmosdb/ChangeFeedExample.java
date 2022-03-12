@@ -1,5 +1,6 @@
 package com.georgeciachir.az204cosmosdb;
 
+import com.georgeciachir.az204cosmosdb.domain.Employee;
 import com.microsoft.azure.functions.ExecutionContext;
 import com.microsoft.azure.functions.annotation.CosmosDBTrigger;
 import com.microsoft.azure.functions.annotation.FunctionName;

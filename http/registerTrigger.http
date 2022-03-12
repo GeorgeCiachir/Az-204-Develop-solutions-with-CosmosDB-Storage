@@ -1,0 +1,15 @@
+POST https://functionforcosmos.azurewebsites.net/api/register-trigger
+Content-Type: application/json
+
+{
+  "dbServiceEndpoint": "https://developwithcosmos.documents.azure.com:443/",
+  "dbKey": "oFRZSXqiM6HkgwdD0o44dsHt0kmn4ipUTcDqRrDNDvpPhM8R1mkpltkqKfbM6L9enxdev6JNRonDjy1zrKJibQ==",
+  "dbName": "demoDB",
+  "collectionName": "employees",
+  "triggerName": "pre-trigger2",
+  "operation": "All",
+  "type": "Pre",
+  "triggerBody":"function trigger() {\n    \n    //JSON does not allow multi-line string\n    var context = getContext();\n    var request = context.getRequest();\n\n    // item to be created in the current operation\n    var itemToCreate = request.getBody();\n\n    if (!(\"timestamp\" in itemToCreate)) {\n        var ts = new Date();\n        itemToCreate[\"timestamp\"] = ts.getTime();\n    }\n\n    itemToCreate[\"aNewField\"] = \"aNewField\";\n\n    request.setBody(itemToCreate);\n}"
+}
+
+###

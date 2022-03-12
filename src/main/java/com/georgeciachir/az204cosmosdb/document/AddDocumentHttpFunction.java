@@ -1,4 +1,4 @@
-package com.georgeciachir.az204cosmosdb;
+package com.georgeciachir.az204cosmosdb.document;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.microsoft.azure.documentdb.ConnectionPolicy;
@@ -12,7 +12,6 @@ import com.microsoft.azure.functions.HttpResponseMessage;
 import com.microsoft.azure.functions.HttpStatus;
 import com.microsoft.azure.functions.annotation.FunctionName;
 import com.microsoft.azure.functions.annotation.HttpTrigger;
-import org.apache.http.entity.ContentType;
 
 import java.io.IOException;
 import java.util.Optional;

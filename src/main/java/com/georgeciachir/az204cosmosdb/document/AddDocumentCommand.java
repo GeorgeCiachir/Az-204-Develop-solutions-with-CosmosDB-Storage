@@ -1,4 +1,6 @@
-package com.georgeciachir.az204cosmosdb;
+package com.georgeciachir.az204cosmosdb.document;
+
+import com.georgeciachir.az204cosmosdb.domain.Employee;
 
 import java.util.List;
 
