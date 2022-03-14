@@ -1,15 +1,25 @@
 # Cosmos DB
+- Azure Cosmos DB is a globally distributed database system that allows you to read and write data from the local replicas of your database,
+  and it transparently replicates the data to all the regions associated with your Cosmos account
+- Azure Cosmos DB is designed to provide low latency, elastic scalability of throughput, well-defined semantics for data consistency, and high availability
+- With its novel multi-master replication protocol, every region supports both writes and reads. The multi-master capability also enables:
+  - Unlimited elastic write and read scalability
+  - 99.999% read and write availability all around the world
+  - Guaranteed reads and writes served in less than 10 milliseconds at the 99th percentile
+- Currently, you can create a maximum of 50 Azure Cosmos accounts under an Azure subscription (this is a soft limit that can be increased via support request)
 
 ![img.png](img.png)
 
+![img_1.png](img_1.png)
+
 ## Supported APIs
-|   **API**   | **Database** entity type | **Container** entity type |
-|:-----------:|:------------------------:|:-------------------------:|
-|  Casandra   |         Keyspace         |           Table           |
-|   MongoDB   |         Database         |        Collection         |
-|   Gremlin   |         Database         |           Graph           |
-| Azure Table |      Not applicable      |           Table           |
-|     SQL     |         Database         |         Container         |
+|   **API**   | **Database** type   | **Container** type   | **Entity** type |
+|:-----------:|---------------------|----------------------|:---------------:|
+|     SQL     |      Database       |      Container       |      Item       |
+|  Casandra   |      Keyspace       |        Table         |       Row       |
+|   MongoDB   |      Database       |      Collection      |    Document     |
+|   Gremlin   |      Database       |        Graph         |  Node or edge   |
+| Azure Table |   Not applicable    |        Table         |      Item       |
 
 ## Scaling
 - Cosmos DB is a managed service, so we cannot specify vertical or horizontal scaling
@@ -34,6 +44,10 @@
     - Pay only for the RU's consumed and storage used
     - Ideal for development workloads
     - Maximum of 5000 RU's
+  - Autoscale
+    - automatically and instantly scale the throughput (RU/s) of your database or container based on it's usage
+    - well suited for mission-critical workloads that have variable or unpredictable traffic patterns, and require SLAs 
+      on high performance and scale
 - Throughput best practices:
   - use a partition strategy to evenly spread throughput on partitions 
   - provision throughput at the container for predictable performance
@@ -41,20 +55,21 @@
   - understand the link between the consistency types and the amount of RU's consumed
 
 ## Data consistency levels spectrum (from left to right, in the order below)
-- Eventual consistency -> provides no guarantee for the order
-- Consistent prefix -> guarantees that updates are returned in order
-- Session -> guarantees that a client will read its own writes
-- Bounded staleness -> guarantees that a read has a max lag (either versions or time)
 - Strong -> guarantees that reads get the most recent version of an item
+- Bounded staleness -> guarantees that a read has a max lag (either versions or time)
+- Session -> guarantees that a client will read its own writes
+- Consistent prefix -> guarantees that updates are returned in order
+- Eventual consistency -> provides no guarantee for the order
 
+![img_2.png](img_2.png)
 
 | **Consistency type** | **Latency** | **Throughput** | **Availability** |
 |:--------------------:|:-----------:|:--------------:|:----------------:|
-| Eventual consistency |    Lower    |     Higher     |      Higher      |
-|  Consistent prefix   |             |                |                  |
-|       Session        |             |                |                  |
-|  Bounded staleness   |             |                |                  |
 |        Strong        |   Higher    |     Lower      |      Lower       |
+|  Bounded staleness   |             |                |                  |
+|       Session        |             |                |                  |
+|  Consistent prefix   |             |                |                  |
+| Eventual consistency |    Lower    |     Higher     |      Higher      |
 
 Consistency levels for SQL APIs
  - Account default -> specified at the account level, every operation will follow the account consistency level
@@ -83,6 +98,15 @@ Example2 -> even better -> a "productId" representing the unique id of the produ
   - Azure Cosmos DB uses hash-based partitioning to spread logical partitions across physical partitions
   - it hashes the partition key value of an item
   - then, it allocates the key space of partition key hashes evenly across the physical partitions
+  - Once you select your partition key, it is not possible to change it in-place. If you need to change your partition
+    key, you should move your data to a new container with your new desired partition key.
+  - Combining the partition key and the item ID creates the item's index
+  - Queries can be efficiently routed to only the relevant physical partitions by including the partition key in the filter predicate
+  - it's the best practice to have a partition key with many distinct values, such as hundreds or thousands
+  - The item ID is a great partition key choice for the following reasons:
+    - There are a wide range of possible values (one unique item ID per item)
+    - Because there is a unique item ID per item, the item ID does a great job at evenly balancing RU consumption and data storage
+    - You can easily do efficient point reads since you'll always know an item's partition key if you know its item ID
 
 **Logical partition**
 ```
@@ -100,6 +124,11 @@ ES analogy -> nodes containing one or multiple shards
   - a container is scaled by distributing data and throughput across physical partitions
   - internally, one or more logical partitions ar mapped to a single physical partition
   - they are entirely managed by Cosmos DB
+  - each individual physical partition can provide a throughput of up to 10,000 request units per second
+  - this implies that logical partitions also have a 10,000 RU/s limit, as each logical partition is only mapped to one physical partition
+  - Your container will require more than a few physical partitions when either of the following are true:
+    - Your container will have over 30,000 RU's provisioned
+    - Your container will store over 100 GB of data
 
 **Replica set**
 ```

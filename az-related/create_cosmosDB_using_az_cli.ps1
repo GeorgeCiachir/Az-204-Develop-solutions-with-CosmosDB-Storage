@@ -14,9 +14,14 @@ az group create `
     --name $resourceGroup `
     --location $location
 
-# Create a Cosmos DB account
-$cosmosDBAccount = "developwithcosmos"
+# Create a Cosmos DB account and retrieve the document endpoint from the response (required for connecting the java client)
+$cosmosDBAccount = "developWithCosmosDB"
 az cosmosdb create `
+    --name $cosmosDBAccount `
+    --resource-group $resourceGroup
+
+# Retrieve the primary key (required for connecting the java client)
+az cosmosdb keys list `
     --name $cosmosDBAccount `
     --resource-group $resourceGroup
 
