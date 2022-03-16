@@ -61,7 +61,7 @@
 - Consistent prefix -> guarantees that updates are returned in order
 - Eventual consistency -> provides no guarantee for the order
 
-![img_2.png](img_2.png)
+![consistency_level_spectrum.png](consistency_level_spectrum.png)
 
 | **Consistency type** | **Latency** | **Throughput** | **Availability** |
 |:--------------------:|:-----------:|:--------------:|:----------------:|
