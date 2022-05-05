@@ -23,7 +23,7 @@
 
 ## Scaling
 - Cosmos DB is a managed service, so we cannot specify vertical or horizontal scaling
-- The concept of scaling is covered by what is called `**Request Unit**` (RU)
+- The concept of scaling is covered by what is called **`Request Unit`** (RU)
 - A Request Unit encapsulates many of the resources needed for the DB into a single unit
 - As a baseline, one RU is equal to a 1kb item read operation from a Cosmos DB container
 - Resources encapsulated in RU's: 
@@ -54,7 +54,7 @@
   - use the serverless account type for development workloads
   - understand the link between the consistency types and the amount of RU's consumed
 
-## Data consistency levels spectrum (from left to right, in the order below)
+## Data consistency levels spectrum (from right to left, in the order below)
 - Strong -> guarantees that reads get the most recent version of an item
 - Bounded staleness -> guarantees that a read has a max lag (either versions or time)
 - Session -> guarantees that a client will read its own writes
@@ -62,14 +62,6 @@
 - Eventual consistency -> provides no guarantee for the order
 
 ![consistency_level_spectrum.png](consistency_level_spectrum.png)
-
-| **Consistency type** | **Latency** | **Throughput** | **Availability** |
-|:--------------------:|:-----------:|:--------------:|:----------------:|
-|        Strong        |   Higher    |     Lower      |      Lower       |
-|  Bounded staleness   |             |                |                  |
-|       Session        |             |                |                  |
-|  Consistent prefix   |             |                |                  |
-| Eventual consistency |    Lower    |     Higher     |      Higher      |
 
 Consistency levels for SQL APIs
  - Account default -> specified at the account level, every operation will follow the account consistency level
